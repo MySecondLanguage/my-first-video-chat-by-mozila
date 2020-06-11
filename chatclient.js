@@ -399,7 +399,7 @@ function handleUserlistMsg(msg) {
   msg.users.forEach(function(username) {
     var item = document.createElement("li");
     item.appendChild(document.createTextNode(username));
-    item.addEventListener("click", invite, false);
+    item.addEventListener("click", showBtn);
 
     listElem.appendChild(item);
   });
@@ -491,12 +491,18 @@ function hangUpCall() {
 // a |notificationneeded| event, so we'll let our handler for that
 // make the offer.
 
-async function invite(evt) {
+const showBtn = (evt) => {
+  document.getElementById('clickedname').innerHTML = evt.target.textContent;
+  window.clickedUsername = evt.target.textContent;
+  document.getElementById('btncall').style.display = 'block';
+}
+
+async function invite() {
   log("Starting to prepare an invitation");
   if (myPeerConnection) {
     alert("You can't start a call because you already have one open!");
   } else {
-    var clickedUsername = evt.target.textContent;
+    var clickedUsername = window.clickedUsername;
 
     // Don't allow users to call themselves, because weird.
 
