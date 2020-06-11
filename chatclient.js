@@ -432,9 +432,11 @@ function closeVideoCall() {
 
     // Stop all transceivers on the connection
 
-    myPeerConnection.getTransceivers().forEach(transceiver => {
-      transceiver.stop();
-    });
+    // myPeerConnection.getTransceivers().forEach(transceiver => {
+    //   transceiver.stop();
+    // });
+
+    myPeerConnection.close();
 
     // Stop the webcam preview as well by pausing the <video>
     // element, then stopping each of the getUserMedia() tracks
