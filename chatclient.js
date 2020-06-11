@@ -60,6 +60,15 @@ function log(text) {
   console.log("[" + time.toLocaleTimeString() + "] " + text);
 }
 
+function getRandomName() {
+  var names = ['abul', 'dhaka', 'habul', 'tabul'];
+
+  var name = names[Math.floor(Math.random() * names.length)];
+
+  return name;
+
+}
+
 // Output an error message to console.
 
 function log_error(text) {
@@ -83,7 +92,8 @@ function sendToServer(msg) {
 // this function sends a "username" message to set our username for this
 // session.
 function setUsername() {
-  myUsername = document.getElementById("name").value;
+  // myUsername = document.getElementById("name").value;
+  myUsername = getRandomName();
 
   sendToServer({
     name: myUsername,
