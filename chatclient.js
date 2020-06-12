@@ -174,6 +174,10 @@ function connect() {
         handleVideoAnswerMsg(msg);
         break;
 
+      case 'call-request':
+        showDBTN(msg);
+        break;
+
       case "new-ice-candidate": // A new ICE candidate has been received
         handleNewICECandidateMsg(msg);
         break;
@@ -499,12 +503,30 @@ const showBtn = (evt) => {
   document.getElementById('btncall').style.display = 'block';
 }
 
+// function accept() {
+//   console.log('accepted');
+// }
+
+function showDBTN(msg) {
+  window.caller = msg.name;
+  document.getElementById('dbtn').style.display = 'block';
+}
+
+function makeCallRequest() {
+  sendToServer({
+    type: 'call-request',
+    name: myUsername,
+    target: clickedUsername,
+  })
+}
+
 async function invite() {
+  document.getElementById('dbtn').style.display = 'none';
   log("Starting to prepare an invitation");
   if (myPeerConnection) {
     alert("You can't start a call because you already have one open!");
   } else {
-    var clickedUsername = window.clickedUsername;
+    var clickedUsername = window.caller;
 
     // Don't allow users to call themselves, because weird.
 
